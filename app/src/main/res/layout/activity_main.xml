@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tommylee.myapplication.MainActivity"
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/applayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        >
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:weightSum="1"
+            android:paddingTop="20dp"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                app:srcCompat="@drawable/choices" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageButton"
+
+                android:layout_gravity="center"
+
+                android:layout_toEndOf="@+id/imageButton"
+                android:layout_toRightOf="@+id/imageButton"
+                android:layout_weight="1"
+                android:textColor="#229922"
+                android:text="LOGOLOGO"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <ImageButton
+                android:id="@+id/right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_alignTop="@+id/textView3"
+                android:layout_gravity="right"
+                android:background="#FFFFFF"
+                app:srcCompat="@drawable/mapcontain" />
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@+id/toolbar"
+            android:background="@color/colorPrimary"
+            android:padding="@dimen/activity_horizontal_margin">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corners"
+                android:drawablePadding="22dp"
+                android:drawableRight="@android:drawable/ic_menu_search"
+                android:gravity="left|center"
+                android:hint="Type some text..."
+                android:padding="10dp"
+                android:textColorHint="@android:color/darker_gray" />
+
+        </RelativeLayout>
+
+    </android.support.design.widget.AppBarLayout>
+   <include layout="@layout/content_main"/>
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/navigation"
+       />
+</LinearLayout>
