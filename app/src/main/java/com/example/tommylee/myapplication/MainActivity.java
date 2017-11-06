@@ -2,12 +2,13 @@ package com.example.tommylee.myapplication;
 
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,15 +16,14 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.support.v4.view.ViewPager;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +32,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -45,35 +44,17 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.LayoutManager mLayoutManager2;
     private RecyclerView mRecyclerView2;
-    private TextView mTextMessage;
+    private ImageButton mapcaller;
+    private ImageButton smartchoice;
+    private ImageButton searchbarbutton;
     ViewPager viewPager;
     private ArrayList<DataFetch> mDataset;
     private ArrayList<DataFetch> mDataset2;
     LinearLayout dots;
+    static int checksum=0;
     private int dotscount;
     private ImageView[] dotsview;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-
-                    return true;
-
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,20 +111,49 @@ public class MainActivity extends AppCompatActivity {
 
         mDataset = new ArrayList<>();
         mDataset2=new ArrayList<>();
-        TestTask(0);
+
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        TestTask(0);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MainAdapter(this,mDataset);
+        mAdapter = new MainAdapter(this,mDataset,0);
         mRecyclerView.setAdapter(mAdapter);
-        TestTask(1);
+        Log.d("checkyo","checked");
         mRecyclerView2 = (RecyclerView) findViewById(R.id.recycler_view2);
-        mLayoutManager2 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView2.setHasFixedSize(true);
+        mLayoutManager2 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);;
         mRecyclerView2.setLayoutManager(mLayoutManager2);
-        mAdapter2 = new ColorAdapter(getApplicationContext(),mDataset2);
-        // Set the adapter for RecyclerView
+        TestTask(1);
+        mAdapter2 = new MainAdapter(this,mDataset2,1);
         mRecyclerView2.setAdapter(mAdapter2);
+
+        mapcaller = (ImageButton)findViewById(R.id.mapcaller);
+        mapcaller.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setMessage("基本訊息對話功能介紹");
+                dialog.show();
+            }
+        });
+
+        smartchoice=(ImageButton)findViewById(R.id.smartchoice);
+        smartchoice.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setMessage("基本功能");
+                dialog.show();
+            }
+        });
+        searchbarbutton=findViewById(R.id.search_bar);
+        searchbarbutton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(v.getContext(), Search_Activity.class);
+                intent.setflag(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -181,10 +191,12 @@ public class MainActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 Request request;
                 if(id==0) {
-                   request = new Request.Builder().url("http://10.16.86.66:5555/autocomplete").build();
+                   request = new Request.Builder().url("http://10.6.38.190:5555/autocomplete").build();
+                    Log.d("checksum1",String.valueOf(id));
                 }
                 else {
-                     request = new Request.Builder().url("http://10.16.86.66:5555/autocomplete?company=z").build();
+                     request = new Request.Builder().url("http://10.6.38.190:5555/autocomplete?company=z").build();
+                    Log.d("checksum2",String.valueOf(id));
                 }
 
                 try {
@@ -202,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
                         mDataset.add(fetch);
                         else
                         mDataset2.add(fetch);
-                        Log.d("showa",mDataset.get(i).toString());
                     }
                     return null;
                 } catch (Exception e) {

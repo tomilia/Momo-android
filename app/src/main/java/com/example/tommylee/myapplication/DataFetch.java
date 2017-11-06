@@ -9,6 +9,7 @@ public class DataFetch {
     private String description,image_link;
     public DataFetch(String description,String image_link){
         this.description=description;
+        //image_link=address
         this.image_link=image_link;
     }
     public int getId(){

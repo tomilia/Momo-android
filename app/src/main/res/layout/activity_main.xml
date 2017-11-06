@@ -27,7 +27,7 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/smartchoice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -48,16 +48,19 @@
                 android:layout_toRightOf="@+id/imageButton"
                 android:layout_weight="1"
                 android:textColor="#229922"
-                android:text="LOGOLOGO"
+                android:text="MoMoCha"
+                android:typeface="sans"
+                android:textSize="24dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <ImageButton
-                android:id="@+id/right"
+                android:id="@+id/mapcaller"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="15dp"
+                android:onClick="onClick"
                 android:layout_alignTop="@+id/textView3"
                 android:layout_gravity="right"
                 android:background="#FFFFFF"
@@ -68,22 +71,21 @@
 
         <RelativeLayout
             android:id="@+id/search_layout"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/toolbar"
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:background="@color/colorPrimary">
 
-            <EditText
-                android:layout_width="match_parent"
+            <ImageButton
+                android:id="@+id/search_bar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/corners"
-                android:drawablePadding="22dp"
-                android:drawableRight="@android:drawable/ic_menu_search"
-                android:gravity="left|center"
-                android:hint="Type some text..."
+                android:layout_gravity="center"
+                android:textColor="#229922"
+                android:background="@color/colorPrimary"
+                android:typeface="sans"
                 android:padding="10dp"
-                android:textColorHint="@android:color/darker_gray" />
+                app:srcCompat="@drawable/searchbar" />
 
         </RelativeLayout>
 
@@ -98,6 +100,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="?android:attr/windowBackground"
+        app:itemIconTint="@drawable/bnt_selected"
+        app:itemTextColor="@drawable/bnt_selected"
         app:menu="@menu/navigation"
        />
 </LinearLayout>

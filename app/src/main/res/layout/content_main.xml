@@ -151,31 +151,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                         android:layout_marginTop="30dp" />
-                    <TextView android:id="@android:id/empty" android:layout_width="wrap_content"
+                    <TextView android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:text="特別推介"
                         android:drawableLeft="@android:drawable/ic_menu_zoom"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="20dp"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="20sp"
                         android:layout_above="@id/recycler_view" />
 
                 </FrameLayout>
                 <RelativeLayout
                     android:id="@+id/card"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:gravity="bottom"
                     android:layout_below="@id/Firstrow"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scrollbars="vertical"
-                        >
+                        android:layout_marginTop="30dp">
                     </android.support.v7.widget.RecyclerView>
-
+                    <TextView android:id="@android:id/empty" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="今期流行"
+                        android:drawableLeft="@android:drawable/ic_menu_zoom"
+                        android:textSize="20sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
                 </RelativeLayout>
             </RelativeLayout>
 
