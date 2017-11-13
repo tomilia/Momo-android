@@ -18,6 +18,7 @@ public class Search_Activity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

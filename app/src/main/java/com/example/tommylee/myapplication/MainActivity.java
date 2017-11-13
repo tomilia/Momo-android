@@ -59,101 +59,100 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
-
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
-        dots = (LinearLayout) findViewById(R.id.Dots);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewpager viewPagerAdapter = new viewpager(this);
-        viewPager.setAdapter(viewPagerAdapter);
-        viewPager.getLayoutParams().height = (int) (height / 3.3);
-        dotscount = viewPagerAdapter.getCount();
-        dotsview = new ImageView[dotscount];
+            setContentView(R.layout.activity_main);
 
 
-        for (int i = 0; i < dotscount; i++) {
-            dotsview[i] = new ImageView(this);
-            dotsview[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.setMargins(8, 0, 8, 0);
-            dots.addView(dotsview[i], params);
-        }
-        dotsview[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int height = displayMetrics.heightPixels;
+            dots = (LinearLayout) findViewById(R.id.Dots);
+            viewPager = (ViewPager) findViewById(R.id.viewPager);
+            viewpager viewPagerAdapter = new viewpager(this);
+            viewPager.setAdapter(viewPagerAdapter);
+            viewPager.getLayoutParams().height = (int) (height / 3.3);
+            dotscount = viewPagerAdapter.getCount();
+            dotsview = new ImageView[dotscount];
+
+
+            for (int i = 0; i < dotscount; i++) {
+                dotsview[i] = new ImageView(this);
+                dotsview[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.setMargins(8, 0, 8, 0);
+                dots.addView(dotsview[i], params);
             }
+            dotsview[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            @Override
-            public void onPageSelected(int position) {
-                for (int i = 0; i < dotscount; i++) {
-                    dotsview[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
                 }
-                dotsview[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
-            }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
+                @Override
+                public void onPageSelected(int position) {
+                    for (int i = 0; i < dotscount; i++) {
+                        dotsview[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
+                    }
+                    dotsview[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
+                }
 
-            }
-        });
+                @Override
+                public void onPageScrollStateChanged(int state) {
 
-        mDataset = new ArrayList<>();
-        mDataset2=new ArrayList<>();
+                }
+            });
+
+            mDataset = new ArrayList<>();
+            mDataset2 = new ArrayList<>();
 
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        TestTask(0);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MainAdapter(this,mDataset,0);
-        mRecyclerView.setAdapter(mAdapter);
-        Log.d("checkyo","checked");
-        mRecyclerView2 = (RecyclerView) findViewById(R.id.recycler_view2);
-        mRecyclerView2.setHasFixedSize(true);
-        mLayoutManager2 = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);;
-        mRecyclerView2.setLayoutManager(mLayoutManager2);
-        TestTask(1);
-        mAdapter2 = new MainAdapter(this,mDataset2,1);
-        mRecyclerView2.setAdapter(mAdapter2);
+            mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            TestTask(0);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new MainAdapter(this, mDataset, 0);
+            mRecyclerView.setAdapter(mAdapter);
+            Log.d("checkyo", "checked");
+            mRecyclerView2 = (RecyclerView) findViewById(R.id.recycler_view2);
+            mRecyclerView2.setHasFixedSize(true);
+            mLayoutManager2 = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            ;
+            mRecyclerView2.setLayoutManager(mLayoutManager2);
+            TestTask(1);
+            mAdapter2 = new MainAdapter(this, mDataset2, 1);
+            mRecyclerView2.setAdapter(mAdapter2);
 
-        mapcaller = (ImageButton)findViewById(R.id.mapcaller);
-        mapcaller.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setMessage("基本訊息對話功能介紹");
-                dialog.show();
-            }
-        });
+            mapcaller = (ImageButton) findViewById(R.id.mapcaller);
+            mapcaller.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                    dialog.setMessage("基本訊息對話功能介紹");
+                    dialog.show();
+                }
+            });
 
-        smartchoice=(ImageButton)findViewById(R.id.smartchoice);
-        smartchoice.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setMessage("基本功能");
-                dialog.show();
-            }
-        });
-        searchbarbutton=findViewById(R.id.search_bar);
-        searchbarbutton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Intent intent = new Intent(v.getContext(), Search_Activity.class);
-                intent.setflag(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+            smartchoice = (ImageButton) findViewById(R.id.smartchoice);
+            smartchoice.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                    dialog.setMessage("基本功能");
+                    dialog.show();
+                }
+            });
+            searchbarbutton = findViewById(R.id.search_bar);
+            searchbarbutton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), Search_Activity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+            });
     }
 
 
@@ -191,11 +190,11 @@ public class MainActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 Request request;
                 if(id==0) {
-                   request = new Request.Builder().url("http://10.6.38.190:5555/autocomplete").build();
+                   request = new Request.Builder().url("http://10.6.38.191:5555/autocomplete").build();
                     Log.d("checksum1",String.valueOf(id));
                 }
                 else {
-                     request = new Request.Builder().url("http://10.6.38.190:5555/autocomplete?company=z").build();
+                     request = new Request.Builder().url("http://10.6.38.191:5555/autocomplete?company=z").build();
                     Log.d("checksum2",String.valueOf(id));
                 }
 
